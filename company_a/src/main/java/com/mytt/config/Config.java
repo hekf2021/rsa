@@ -1,6 +1,6 @@
 package com.mytt.config;
 
 public class Config {
-    public static final String PUBLIC_KEY="";
-    public static final String PRIVATE_KEY="";
+    public static final String PUBLIC_KEY="MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMRfhft9F0BuURj1fflwK+oUDXJcz6rPJycO5jWe6mcf5EafAtnC3hIYGlqRJh4DfxQo5MqThgfwJOlQ7A2vEP8CAwEAAQ==";
+    public static final String PRIVATE_KEY="MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAgjbTYurEC96M+hZq48taqV6Ra7viOLwQ4Cnb0857xfbIwBSvlneWcDs1gXUmg1Saxty2OAU1YtaoZb0talh+zQIDAQABAkAq44gIoq7kAe+JR+z5DrfT5XQcegvvB/K/AsqHHxGhiEJYaVNIypkqhnYmpl47t9ZxeNnwOlKyqDjrf+a6br1BAiEA/vTsxyKzGb7unsjofd9tz1Ic2f79GGucCG30HQ9s8EUCIQCCvzqmUnGQ0RZPvYAl+IfGMteuYn1SZKhs7YFbwQ+Q6QIgO3l3Ipz9mqvnjjLfyT0tqIdHI7NP5zpzE6RSpdTLXOECIAIRG9A9RWZQp9Wi3T+8agkMDLTJAconpTHznzPgHWrhAiAcSlZy2hWM1ckKnjv5Fg/3QZITjfczhh95YO/PX+phKQ==";
 }
