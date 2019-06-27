@@ -12,4 +12,24 @@
     <artifactId>rsacode</artifactId>
     <name>rsacode</name>
 
+
+    <dependencies>
+        <dependency>
+            <!--TODO merge from bouncy castle-->
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.60</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.51</version>
+        </dependency>
+    </dependencies>
+
 </project>
