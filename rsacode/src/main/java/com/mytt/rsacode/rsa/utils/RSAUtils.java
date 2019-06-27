@@ -125,6 +125,31 @@ public class RSAUtils {
 
 
     /**
+     * 校验数字签名
+     *
+     * @param data  加密数据
+     * @param publicKey 公钥
+     * @param sign 数字签名
+     * @return 校验成功返回true 失败返回false
+     * @throws Exception
+     */
+    public static boolean verify(String data, String publicKey, String sign) throws Exception {
+        // 解密由base64编码的公钥
+        byte[] keyBytes = Base64.decodeBase64(publicKey);
+        // 构造X509EncodedKeySpec对象
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+        // KEY_ALGORITHM 指定的加密算法
+        KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+        // 取公钥匙对象
+        PublicKey pubKey = keyFactory.generatePublic(keySpec);
+        Signature signature = Signature.getInstance("RSA");
+        signature.initVerify(pubKey);
+        signature.update(data.getBytes());
+        // 验证签名是否正常
+        return signature.verify(Base64.decodeBase64(sign));
+    }
+
+    /**
      * 用私钥对指定字符串进行签名
      * @param str 需要签名的字符串
      * @param privateKey 私钥
