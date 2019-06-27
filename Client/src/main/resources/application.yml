@@ -1,7 +1,7 @@
 spring:
   application:
-    name: b
+    name: client
 server:
   port: 8082
   servlet:
-    context-path: /b
+    context-path: /client

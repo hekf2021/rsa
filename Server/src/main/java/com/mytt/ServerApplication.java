@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class Company_B_Application {
+public class ServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Company_B_Application.class, args);
+        SpringApplication.run(ServerApplication.class, args);
     }
 
 }

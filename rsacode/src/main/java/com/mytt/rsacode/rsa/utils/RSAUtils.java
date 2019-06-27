@@ -18,7 +18,7 @@ public class RSAUtils {
      * 密钥长度，DH算法的默认密钥长度是1024
      * 密钥长度必须是64的倍数，在512到65536位之间
      * */
-    private static final int KEY_SIZE=512;
+    private static final int KEY_SIZE=2048;
     //公钥
     public static final String PUBLIC_KEY="public_key";
 
@@ -142,7 +142,7 @@ public class RSAUtils {
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         // 取公钥匙对象
         PublicKey pubKey = keyFactory.generatePublic(keySpec);
-        Signature signature = Signature.getInstance("RSA");
+        Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initVerify(pubKey);
         signature.update(data.getBytes());
         // 验证签名是否正常

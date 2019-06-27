@@ -2,32 +2,74 @@ package com.mytt.rsacode.rsa.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mytt.rsacode.rsa.constants.Constants;
+import com.mytt.rsacode.rsa.model.RsaRuquest;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class RSARequestUtils {
 
     /**
      * 对请求参数进行加密和签名
-     * @param json   http request parameters
+     * @param bizContent   请求内容
      * @return 加密和签名后的json字符串
      */
-    private String buildRequestStr( String json,String publicKey,String privateKey) throws Exception {
+    public static Map<String,Object> buildBody(String bizContent,String publicKey,String privateKey,Map<String,Object> publicParamMap) throws Exception {
         // 生成AES 随机密钥
-        String randomKey = AESUtils.randomKey();
+        String randomKey = AESUtils.randomKey()+"abadfasdfa";
         // 对AES密钥加密
         String randomKeyEncrypt = RSAUtils.encryptByPublicKey(randomKey,publicKey);
-        // 用AES密钥对请求参数加密
-        String data = AESUtils.encrypt(json, randomKey);
-        TreeMap<String, Object> tempMap = new TreeMap<>();
-        tempMap.put(Constants.DATA, data);
-        tempMap.put(Constants.RANDOM_KEY_ENCRYPT, randomKeyEncrypt);
-        tempMap.put(Constants.DATA, System.currentTimeMillis());
-        JSONObject jsonObject = new JSONObject(tempMap);
-        String signStr = jsonObject.toJSONString();
-        // 对加密后的输入参数签名
-        String signedStr = RSAUtils.sign(signStr, privateKey);
-        jsonObject.put(Constants.SIGN_DATA, signedStr);
-        return jsonObject.toJSONString();
+        Map<String,Object> map = new TreeMap<>();
+        map.put(Constants.RSA_REQUEST.BIZ_CONTENT,bizContent);
+        map.put(Constants.RSA_REQUEST.RANDOM_KEY,randomKey);
+        map.put(Constants.RSA_REQUEST.TIMESTAMP,System.currentTimeMillis());
+        if(publicParamMap!=null){
+            map.putAll(publicParamMap);
+        }
+        JSONObject jsonObject = new JSONObject(map);
+        String jsonObjectEncrypt = RSAUtils.encryptByPublicKey(jsonObject.toJSONString(),publicKey);
+        String sign = RSAUtils.sign(jsonObjectEncrypt, privateKey);
+        map.remove(Constants.RSA_REQUEST.RANDOM_KEY);
+        map.put(Constants.RSA_REQUEST.RANDOM_KEY_ENCRYPT_,randomKeyEncrypt);
+        map.put(Constants.RSA_REQUEST.SIGN,sign);
+        return map;
+    }
+
+    public static String converMapToRequestStr(Map<String,Object> map){
+        StringBuffer sb = new StringBuffer();
+        Set<String> keys = map.keySet();
+        for(String key:keys){
+            if(sb.length()==0){
+                sb.append(key).append("=").append(map.get(key));
+            }else{
+                sb.append("&").append(key).append("=").append(map.get(key));
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 验签
+     * @param rsaRuquest
+     * @param publicKey
+     * @param privateKey
+     * @throws Exception
+     */
+    public static void verifyBody(RsaRuquest rsaRuquest, String publicKey, String privateKey) throws Exception{
+        //验签
+        String randomKey = RSAUtils.decryptByPrivateKey(rsaRuquest.getRandomKeyEncrypt(),privateKey);
+        Map<String,Object> map = new TreeMap<>();
+        map.put(Constants.RSA_REQUEST.APP_ID,rsaRuquest.getAppId());
+        map.put(Constants.RSA_REQUEST.BIZ_CONTENT,rsaRuquest.getBizContent());
+        map.put(Constants.RSA_REQUEST.CHARSET,rsaRuquest.getCharset());
+        map.put(Constants.RSA_REQUEST.TIMESTAMP,rsaRuquest.getTimestamp());
+        map.put(Constants.RSA_REQUEST.SDK_VERSION,rsaRuquest.getSdkVersion());
+        map.put(Constants.RSA_REQUEST.RANDOM_KEY,randomKey);
+        JSONObject jsonObject = new JSONObject(map);
+        boolean state =  RSAUtils.verify(jsonObject.toJSONString(), publicKey, rsaRuquest.getSign());
+        if(!state){
+            throw new Exception("验签失败");
+        }
     }
 }

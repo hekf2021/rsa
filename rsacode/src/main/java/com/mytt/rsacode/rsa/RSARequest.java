@@ -1,15 +1,15 @@
 package com.mytt.rsacode.rsa;
 
-import com.mytt.rsacode.rsa.model.RuquestParamObject;
+import com.mytt.rsacode.rsa.model.RsaRuquest;
 
 public class RSARequest {
-    private RuquestParamObject paramObject;
+    private RsaRuquest paramObject;
 
-    public void setParamObject(RuquestParamObject paramObject) {
+    public void setParamObject(RsaRuquest paramObject) {
         this.paramObject = paramObject;
     }
 
-    public RuquestParamObject getParamObject() {
+    public RsaRuquest getParamObject() {
         return paramObject;
     }
 }

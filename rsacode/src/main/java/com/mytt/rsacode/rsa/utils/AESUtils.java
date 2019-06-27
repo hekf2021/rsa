@@ -9,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
 import java.security.SecureRandom;
 import java.security.Security;
+import java.util.UUID;
 
 /**
  * AES加密工具
@@ -24,6 +25,7 @@ public class AESUtils {
         SecureRandom random = new SecureRandom();
         long randomKey = random.nextLong();
         return String.valueOf(randomKey);
+        //return UUID.randomUUID().toString().replaceAll("-","").toUpperCase();
     }
 
     /**
