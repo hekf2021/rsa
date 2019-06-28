@@ -169,7 +169,7 @@ public class RSAUtils {
         // 对密钥解密
         byte[] keyBytes = Base64.decodeBase64(privateKey);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         return keyFactory.generatePrivate(pkcs8KeySpec);
     }
 
