@@ -23,31 +23,19 @@ public class RSARequestUtils {
         Map<String,Object> map = new TreeMap<>();
         map.put(Constants.RSA_REQUEST.BIZ_CONTENT,bizContent);
         map.put(Constants.RSA_REQUEST.RANDOM_KEY,randomKey);
-        map.put(Constants.RSA_REQUEST.TIMESTAMP,System.currentTimeMillis());
+        map.put(Constants.RSA_REQUEST.TIMESTAMP,Long.valueOf(System.currentTimeMillis()).toString());
         if(publicParamMap!=null){
             map.putAll(publicParamMap);
         }
-        JSONObject jsonObject = new JSONObject(map);
-        String jsonObjectEncrypt = RSAUtils.encryptByPublicKey(jsonObject.toJSONString(),publicKey);
-        String sign = RSAUtils.sign(jsonObjectEncrypt, privateKey);
+        String json = new JSONObject(map).toJSONString();
+        System.out.println("生成签名map "+json);
+        String sign = RSAUtils.sign(json, privateKey);
         map.remove(Constants.RSA_REQUEST.RANDOM_KEY);
         map.put(Constants.RSA_REQUEST.RANDOM_KEY_ENCRYPT_,randomKeyEncrypt);
         map.put(Constants.RSA_REQUEST.SIGN,sign);
         return map;
     }
 
-    public static String converMapToRequestStr(Map<String,Object> map){
-        StringBuffer sb = new StringBuffer();
-        Set<String> keys = map.keySet();
-        for(String key:keys){
-            if(sb.length()==0){
-                sb.append(key).append("=").append(map.get(key));
-            }else{
-                sb.append("&").append(key).append("=").append(map.get(key));
-            }
-        }
-        return sb.toString();
-    }
 
     /**
      * 验签
@@ -66,8 +54,9 @@ public class RSARequestUtils {
         map.put(Constants.RSA_REQUEST.TIMESTAMP,rsaRuquest.getTimestamp());
         map.put(Constants.RSA_REQUEST.SDK_VERSION,rsaRuquest.getSdkVersion());
         map.put(Constants.RSA_REQUEST.RANDOM_KEY,randomKey);
-        JSONObject jsonObject = new JSONObject(map);
-        boolean state =  RSAUtils.verify(jsonObject.toJSONString(), publicKey, rsaRuquest.getSign());
+        String json = new JSONObject(map).toJSONString();
+        System.out.println("验签map "+json);
+        boolean state =  RSAUtils.verify(json, publicKey, rsaRuquest.getSign());
         if(!state){
             throw new Exception("验签失败");
         }

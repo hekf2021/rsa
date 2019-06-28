@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>company_a</module>
-        <module>company_b</module>
+        <module>Server</module>
+        <module>Client</module>
         <module>rsacode</module>
     </modules>
     <properties>

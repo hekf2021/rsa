@@ -38,6 +38,7 @@ public class TestControler {
         JSONObject jsonObject = new JSONObject(businessMap);
 
         Map<String, Object> bodyMap = RSARequestUtils.buildBody(jsonObject.toJSONString(), serverPublicKey, clientPrivateKey, publicParamMap);
+        System.out.println("请求bodyMap "+bodyMap);
         String url ="http://localhost:8081/server/api/pay";
         JSONObject requestJsonObject = new JSONObject(bodyMap);
         String result = HttpUtil.doPost(url,requestJsonObject.toJSONString());
