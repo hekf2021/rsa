@@ -9,7 +9,7 @@ public class Constants {
         public static final String TIMESTAMP="timestamp";
         public static final String SDK_VERSION="sdkVersion";
         public static final String RANDOM_KEY="randomKey";
-        public static final String RANDOM_KEY_ENCRYPT_="randomKeyEncrypt";
+        public static final String RANDOM_KEY_ENCRYPT="randomKeyEncrypt";
         public static final String SIGN="sign";
     }
     public static final String APP_ID="1092834648";

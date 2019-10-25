@@ -31,7 +31,7 @@ public class RSARequestUtils {
         System.out.println("生成签名map "+json);
         String sign = RSAUtils.sign(json, privateKey);
         map.remove(Constants.RSA_REQUEST.RANDOM_KEY);
-        map.put(Constants.RSA_REQUEST.RANDOM_KEY_ENCRYPT_,randomKeyEncrypt);
+        map.put(Constants.RSA_REQUEST.RANDOM_KEY_ENCRYPT,randomKeyEncrypt);
         map.put(Constants.RSA_REQUEST.SIGN,sign);
         return map;
     }

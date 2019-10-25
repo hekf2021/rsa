@@ -31,6 +31,7 @@ public class PayControler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         System.out.println("业务处理......");
         //生成返回参数
         Map<String,Object> businessMap = new HashMap<>();
@@ -38,7 +39,7 @@ public class PayControler {
         businessMap.put("state", 1);
         businessMap.put("create", "2019-02-23 12:23:45");
         JSONObject jsonObject = new JSONObject(businessMap);
-        Map<String, Object> resultMap = RSARequestUtils.buildBody(jsonObject.toJSONString(), clientPublicKey, serverPrivateKey, null);
+        Map<String, Object> resultMap = RSARequestUtils.buildBody(jsonObject.toJSONString(), clientPublicKey, serverPrivateKey, businessMap);
         return new ResultInfo(resultMap);
     }
 

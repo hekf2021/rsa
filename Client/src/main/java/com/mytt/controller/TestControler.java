@@ -1,6 +1,7 @@
 package com.mytt.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.mytt.rsacode.rsa.constants.Constants;
 import com.mytt.rsacode.rsa.model.ResultInfo;
@@ -43,7 +44,8 @@ public class TestControler {
         JSONObject requestJsonObject = new JSONObject(bodyMap);
         String result = HttpUtil.doPost(url,requestJsonObject.toJSONString());
         System.out.println("http请求返回结果："+result);
-       return new ResultInfo();
+        ResultInfo resultInfo = JSON.parseObject(result, ResultInfo.class);
+       return resultInfo;
     }
 
 
