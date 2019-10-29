@@ -1,7 +1,5 @@
 package com.mytt.rsacode.rsa;
 
-import com.mytt.rsacode.rsa.utils.RSAUtils;
-
 import java.util.Map;
 
 public class RSACoder2 {
@@ -15,12 +13,12 @@ public class RSACoder2 {
     public static void main(String[] args) throws Exception {    
         //初始化密钥    
         //生成密钥对    
-        Map<String,String> keyMap= RSAUtils.initKey();
+        Map<String,String> keyMap= RSA.initKey();
         //公钥    
-        String publicKey= keyMap.get(RSAUtils.PUBLIC_KEY);
+        String publicKey= keyMap.get(RSA.PUBLIC_KEY);
         //byte[] publicKey = b;  
         //私钥    
-        String privateKey= keyMap.get(RSAUtils.PRIVATE_KEY);
+        String privateKey= keyMap.get(RSA.PRIVATE_KEY);
         System.out.println("公钥："+ publicKey);
         System.out.println("私钥："+privateKey);
 
@@ -30,12 +28,12 @@ public class RSACoder2 {
         System.out.println("===========甲方向乙方发送加密数据==============");
         System.out.println("原文:"+str);
         //甲方进行数据的加密
-        String code1= RSAUtils.encryptByPublicKey(str, publicKey);
+        String code1= RSA.encryptByPublicKey(str, publicKey);
         //String code1= RSAUtils.encryptByPrivateKey(str, privateKey);
         System.out.println("甲方 使用乙方公钥加密后的数据："+code1);
         System.out.println("===========乙方使用甲方提供的公钥对数据进行解密==============");
         //乙方进行数据的解密
-        String decode1= RSAUtils.decryptByPrivateKey(code1, privateKey);
+        String decode1= RSA.decryptByPrivateKey(code1, privateKey);
         //String decode1= RSAUtils.decryptByPublicKey(code1, publicKey);
         System.out.println("乙方解密后的数据："+new String(decode1)+"");
 

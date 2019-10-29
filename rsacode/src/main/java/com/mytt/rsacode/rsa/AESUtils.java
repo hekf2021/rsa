@@ -1,4 +1,4 @@
-package com.mytt.rsacode.rsa.utils;
+package com.mytt.rsacode.rsa;
 
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;

@@ -14,13 +14,13 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RsaRuquest implements Serializable {
+public class RsaVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String appId;
-	private String bizContent;
 	private String charset;
-	private String timestamp;
 	private String sdkVersion;
+	private String bizContent;
+	private String timestamp;
 	private String randomKeyEncrypt;
 	private String sign;
 

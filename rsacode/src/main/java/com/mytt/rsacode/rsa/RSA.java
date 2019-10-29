@@ -1,4 +1,4 @@
-package com.mytt.rsacode.rsa.utils;
+package com.mytt.rsacode.rsa;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -11,7 +11,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RSAUtils {
+public class RSA {
     //非对称密钥算法
     public static final String KEY_ALGORITHM="RSA";
     /**
